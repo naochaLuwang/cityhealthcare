@@ -6,13 +6,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
+  DialogFooter,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { useCentreContext } from "../Provider/Context/Centre.context";
-import { DialogClose } from "@radix-ui/react-dialog";
 
 const AddDiagnostic = () => {
   const [name, setName] = useState("");
@@ -24,7 +25,12 @@ const AddDiagnostic = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+
     await addDiagnosticCentre(name, address, hours);
+
+    setName("");
+    setAddress("");
+    setHours("");
   };
   return (
     <Dialog>
@@ -71,9 +77,11 @@ const AddDiagnostic = () => {
             onChange={(e) => setHours(e.target.value)}
           />
         </div>
-        <DialogClose asChild>
-          <Button onClick={onSubmitHandler}>Create</Button>
-        </DialogClose>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button onClick={onSubmitHandler}>Create</Button>
+          </DialogClose>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

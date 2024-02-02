@@ -28,16 +28,20 @@ export const CentreProvider = ({ children }) => {
   };
 
   const addDiagnosticCentre = async (name, address, hours) => {
-    await setDoc(doc(db, "Diagnostics", uuid()), {
-      name: name,
-      address: address,
+    if ((name !== "" && address !== "") || hours !== "") {
+      await setDoc(doc(db, "Diagnostics", uuid()), {
+        name: name,
+        address: address,
 
-      hours: hours,
-      status: "ACTIVE",
-    });
+        hours: hours,
+        status: "ACTIVE",
+      });
 
-    toast.success("Centre created successfully");
-    await getAllDiagnosticCentres();
+      toast.success("Centre created successfully");
+      await getAllDiagnosticCentres();
+    } else {
+      toast.error("Please enter all the rrquired fields");
+    }
   };
 
   useEffect(() => {

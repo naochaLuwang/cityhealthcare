@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CentreProvider } from "../Provider/Context/Centre.context";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,12 +12,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <CentreProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <>{children}</>
-        </body>
-      </html>
-    </CentreProvider>
+    <ClerkProvider
+      appearance={{
+        layout: {
+          socialButtonsPlacement: "bottom",
+        },
+      }}
+    >
+      <CentreProvider>
+        <html lang="en">
+          <body className={inter.className}>
+            <>{children}</>
+          </body>
+        </html>
+      </CentreProvider>
+    </ClerkProvider>
   );
 }

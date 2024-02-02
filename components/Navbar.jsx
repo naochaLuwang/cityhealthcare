@@ -13,6 +13,7 @@ import {
 import { Button } from "./ui/button";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
@@ -29,10 +30,8 @@ const Navbar = () => {
           />
         </Link>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger className="mr-10">
-            <Button variant="outline">Open</Button>
-          </DropdownMenuTrigger>
+        {/* <DropdownMenu>
+          <DropdownMenuTrigger className="mr-10">Open</DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -43,7 +42,9 @@ const Navbar = () => {
               Sign Out
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
+
+        <UserButton />
       </div>
     </>
   );
